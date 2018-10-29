@@ -6,4 +6,4 @@ Prerequisites:
 * Install node.js ^8.11.3 and npm
 * Install Ganache: http://truffleframework.com/ganache
 * Run Ganache
-    * In Ganache settings, set mnemonic to "kiwi just service vital feature rural vibrant copy pledge useless fee forum" - this is so that we can use the known private keys in the tests (private keys for the mnemonic are in test/pk.json)
+* Set TEST_MNEMONIC environment variable to the same mnemonic as used by Ganache

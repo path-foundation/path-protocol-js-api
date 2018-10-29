@@ -5,7 +5,6 @@ const Resolver = require('truffle-resolver');
 const path = require('path');
 const crypto = require('crypto');
 const { generateAddressesFromSeed } = require('./util/keys');
-const config = require('./config/config');
 
 const artifacts = new Resolver({
     // Project directory
@@ -16,7 +15,7 @@ const artifacts = new Resolver({
 
 const web3 = new Web3('http://127.0.0.1:7545');
 
-const keys = generateAddressesFromSeed(config.mnemonic, config.addressCount);
+const keys = generateAddressesFromSeed(process.env.TEST_MNEMONIC, 10);
 
 const CertificatesArtifact = artifacts.require('Certificates');
 const IssuersArtifact = artifacts.require('Issuers');
