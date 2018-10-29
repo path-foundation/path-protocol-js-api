@@ -1,0 +1,34 @@
+{
+  "name": "path-platform-js-api",
+  "version": "0.0.1",
+  "description": "JavaScript api for the Path platform; provides js wrappers around solidity contracts",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "path-platform",
+    "api"
+  ],
+  "author": "Path Foundation",
+  "license": "MIT",
+  "files": [
+    "README.md",
+    "index.js",
+    "./src/certificates.js",
+    "./src/issuers.js"
+  ],
+  "dependencies": {
+    "truffle-contract": "^4.0.0-beta.1",
+    "web3": "^1.0.0-beta.36"
+  },
+  "devDependencies": {
+    "bignumber.js": "^7.2.1",
+    "bip39": "^2.5.0",
+    "eth-crypto": "^1.2.3",
+    "ethereumjs-wallet": "^0.6.2",
+    "mocha": "^5.2.0",
+    "path-protocol-artifacts": "0.0.2",
+    "truffle-resolver": "^5.0.0-beta.1"
+  }
+}
