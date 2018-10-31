@@ -6,6 +6,6 @@ install:
   - npm install
 script: 
   - ./node_modules/.bin/eslint .
-  - ./node_modules/.bin/_mocha
+#  - ./node_modules/.bin/_mocha
 #  - npm install -g istanbul
 #  - istanbul check-coverage --statements 100 --branches 80 --functions 100 --lines 100
