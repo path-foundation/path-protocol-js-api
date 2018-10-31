@@ -41,14 +41,14 @@ describe('Issuers API', () => {
 
         issuers = await IssuersArtifact.new({ from: identities.owner.address });
 
-        // Instantiate certificates API
+        // Instantiate issuers API
         issuersApi = new Issuers(web3, issuers.abi, issuers.address);
     });
 
     it('Adding an issuer', async () => {
         // add an issuer
         await issuersApi.addIssuer(identities.issuer.address, identities.owner.address);
-        // check that teh issuer has been added
+        // check that the issuer has been added
         const status = await issuersApi.getIssuerStatus(identities.issuer.address);
         assert.equal(status.toNumber(), issuersApi.issuerStatus.Active);
     });

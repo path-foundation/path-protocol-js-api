@@ -4,7 +4,8 @@
   "description": "JavaScript api for the Path platform; provides js wrappers around solidity contracts",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "cover": "node_modules/.bin/nyc --reporter=lcov --reporter=text-lcov mocha && open coverage/lcov-report/index.html"
   },
   "keywords": [
     "path-platform",
@@ -25,9 +26,16 @@
   "devDependencies": {
     "bignumber.js": "^7.2.1",
     "bip39": "^2.5.0",
+    "eslint": "^5.7.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-react": "^7.11.1",
     "eth-crypto": "^1.2.3",
     "ethereumjs-wallet": "^0.6.2",
     "mocha": "^5.2.0",
+    "nyc": "^13.1.0",
     "path-protocol-artifacts": "0.0.2",
     "truffle-resolver": "^5.0.0-beta.1"
   }

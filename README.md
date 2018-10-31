@@ -1,4 +1,5 @@
 # PATH Javascript API #
+[![Build Status](https://travis-ci.org/path-foundation/path-protocol-js-api.svg?branch=master)](https://travis-ci.org/path-foundation/path-protocol-js-api)
 
 ## JS API wraps smart contract calls to the Ethereum contracts used by the Path Platform into JS modules ##
 

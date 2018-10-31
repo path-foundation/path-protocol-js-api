@@ -44,7 +44,7 @@ module.exports = {
         "import/prefer-default-export": "off",
         // warn
         "strict": "warn",
-        "max-len": "warn",
+        "max-len": "off",
         "no-lonely-if": "warn",
         "react/no-unused-prop-types": "warn",
         "react/no-string-refs": "warn",

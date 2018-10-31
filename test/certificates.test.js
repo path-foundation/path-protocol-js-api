@@ -116,7 +116,7 @@ describe('Certificates API', () => {
         assert.ok(meta[1] === true);
     });
 
-    it('Try to get an index of a non existing certificate', async () => {
+    it('Try to get an index of a non-existing certificate', async () => {
         try {
             await certificatesApi.getCertificateMetadata(identities.user.address, nonExistingCertificateHash);
             assert.fail();
@@ -133,10 +133,11 @@ describe('Certificates API', () => {
         // we have added two certificates so far;
         // make sure we get the right count
         assert.ok(count.toNumber() === 2);
+    });
 
-        // for (let i = 0; i < count; i++) {
-        //     const meta = await certificatesApi.getCertificateAt(identities.user.address, i);
-        //     console.log(`${meta.hash} - ${meta.revoked ? 'revoked' : 'current'}`);
-        // }
+    it('Get first certificate for the user', async () => {
+        const cert = await certificatesApi.getCertificateAt(identities.user.address, 0);
+
+        assert.equal(cert.hash, `0x${certificateHash}`, "Certificate hash doesn't match");
     });
 });
