@@ -17,6 +17,8 @@ const web3 = new Web3('http://127.0.0.1:7545');
 
 const keys = generateAddressesFromSeed(process.env.TEST_MNEMONIC, 10);
 
+console.log(keys);
+
 const CertificatesArtifact = artifacts.require('Certificates');
 const IssuersArtifact = artifacts.require('Issuers');
 
@@ -71,18 +73,25 @@ describe('Certificates API', () => {
     };
 
     before(async () => {
+        console.log('Adding following identities to the wallet');
+        console.log(identities);
         Object.keys(identities).forEach(i => {
             web3.eth.accounts.wallet.add(identities[i].privateKey);
         });
+        console.log('Done adding identities to the wallet');
 
         web3.eth.defaultAddress = identities.owner.address;
 
         CertificatesArtifact.setProvider(web3.currentProvider);
         IssuersArtifact.setProvider(web3.currentProvider);
 
+        console.log(`Deploying Issuers and Certificates smart contracts as... ${identities.owner.address}`);
         // Deploy certificates
         issuers = await IssuersArtifact.new({ from: identities.owner.address });
         certificates = await CertificatesArtifact.new(issuers.address, { from: identities.owner.address });
+        console.log('Done deploying smart contracts');
+        console.log(`Issuers contract ${issuers.address}`);
+        console.log(`Certificates contract ${certificates.address}`);
 
         // Create an instance of issuers api
         issuersApi = new Issuers(web3, issuers.abi, issuers.address);

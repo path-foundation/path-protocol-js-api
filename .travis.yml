@@ -9,8 +9,9 @@ install:
   - npm install -g ganache-cli
 script: 
   - ./node_modules/.bin/eslint .
-  - ganache-cli -p 7545 --mnemonic $TEST_MNEMONIC > /dev/null &
-  - sleep 5
+  - ganache-cli -p 7545 --mnemonic $TEST_MNEMONIC > ~/ganache.log &
+  - sleep 10
+  - cat ~/ganache.log
   - ./node_modules/.bin/_mocha
 #  - npm install -g istanbul
 #  - istanbul check-coverage --statements 100 --branches 80 --functions 100 --lines 100
