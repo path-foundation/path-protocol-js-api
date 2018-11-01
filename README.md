@@ -7,4 +7,4 @@ Prerequisites:
 * Install node.js ^8.11.3 and npm
 * Install Ganache: http://truffleframework.com/ganache
 * Run Ganache
-* Set TEST_MNEMONIC environment variable to the same mnemonic as used by Ganache
+* Set TEST_MNEMONIC environment variable on local environment AND in `.trevis.yml` to the same mnemonic as used by Ganache
