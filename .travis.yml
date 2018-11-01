@@ -9,6 +9,7 @@ install:
   - npm install -g ganache-cli
 script: 
   - ./node_modules/.bin/eslint .
+  - echo $TEST_MNEMONIC
   - ganache-cli -p 7545 -m "kiwi just service vital feature rural vibrant copy pledge useless fee forum" > ~/ganache.log &
   - sleep 10
   - cat ~/ganache.log
