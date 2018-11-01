@@ -22,7 +22,7 @@ const PublicKeysArtifact = artifacts.require('PublicKeys');
 // issuers.js module that we are testing
 const PublicKeys = require('../src/pubkeys');
 
-describe('Issuers API', () => {
+describe('PublicKeys API', () => {
     let pubkeys,
         pubkeysApi;
 
