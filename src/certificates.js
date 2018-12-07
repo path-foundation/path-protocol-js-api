@@ -17,6 +17,8 @@ class Certificates {
             }
         };
 
+        this.address = () => address;
+
         /**
          * Method adds the certificate hash to the user's list of certificates
          * @param certificateHash The certificate hash

@@ -18,11 +18,11 @@ const keys = generateAddressesFromSeed(process.env.TEST_MNEMONIC, 10);
 const IssuersArtifact = artifacts.require('Issuers');
 
 // issuers.js module that we are testing
-const Issuers = require('../src/issuers');
+const IssuersApi = require('../src/issuers');
 
 describe('Issuers API', () => {
     let issuersApi,
-        issuers;
+        issuersContract;
 
     const identities = {
         owner: keys[0],
@@ -39,10 +39,10 @@ describe('Issuers API', () => {
 
         IssuersArtifact.setProvider(web3.currentProvider);
 
-        issuers = await IssuersArtifact.new({ from: identities.owner.address });
+        issuersContract = await IssuersArtifact.new({ from: identities.owner.address });
 
         // Instantiate issuers API
-        issuersApi = new Issuers(web3, issuers.abi, issuers.address);
+        issuersApi = new IssuersApi(web3, issuersContract.abi, issuersContract.address);
     });
 
     it('Adding an issuer', async () => {

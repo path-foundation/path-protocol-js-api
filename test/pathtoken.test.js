@@ -18,7 +18,7 @@ const keys = generateAddressesFromSeed(process.env.TEST_MNEMONIC, 10);
 const PathTokenArtifact = artifacts.require('PathToken');
 
 // issuers.js module that we are testing
-const PathToken = require('../src/pathtoken');
+const PathTokenApi = require('../src/pathtoken');
 
 describe('PathToken API', () => {
     let tokenApi,
@@ -39,10 +39,8 @@ describe('PathToken API', () => {
 
         tokenContract = await PathTokenArtifact.new({ from: identities.account1.address });
 
-        console.log(`PthToken address: ${tokenContract.address}`);
-
         // Instantiate issuers API
-        tokenApi = new PathToken(web3, tokenContract.abi, tokenContract.address);
+        tokenApi = new PathTokenApi(web3, tokenContract.abi, tokenContract.address);
     });
 
     it('transfer tokens from account1 to account2', async () => {
@@ -64,12 +62,7 @@ describe('PathToken API', () => {
 
     it('transfer tokens from account1 to account3 by account2', async () => {
         const account1balance1 = await tokenApi.balanceOf(identities.account1.address);
-        const account2balance1 = await tokenApi.balanceOf(identities.account2.address);
         const account3balance1 = await tokenApi.balanceOf(identities.account3.address);
-
-        console.log(account1balance1.toNumber());
-        console.log(account2balance1.toNumber());
-        console.log(account3balance1.toNumber());
 
         const transferValue = 243;
 
@@ -88,12 +81,7 @@ describe('PathToken API', () => {
             identities.account2.address);
 
         const account1balance2 = await tokenApi.balanceOf(identities.account1.address);
-        const account2balance2 = await tokenApi.balanceOf(identities.account2.address);
         const account3balance2 = await tokenApi.balanceOf(identities.account3.address);
-
-        console.log(account1balance2.toNumber());
-        console.log(account2balance2.toNumber());
-        console.log(account3balance2.toNumber());
 
         // We don't want to add explicit dependency on BN because lazy.
         const BN = account1balance1.constructor;

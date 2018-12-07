@@ -22,6 +22,9 @@ class Issuers {
                 initialized = true;
             }
         };
+
+        this.address = () => address;
+
         /**
          * @description Add an issuer to the Issuers contract;
          * any issuer who wants to submit certificates has to be added to The issuers contract

@@ -14,6 +14,8 @@ class PathToken {
             }
         };
 
+        this.address = () => address;
+
         /**
          * @description Get the balance of an address
          * @param {*} address Address to get balance of

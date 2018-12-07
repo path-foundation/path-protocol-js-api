@@ -16,6 +16,8 @@ class PublicKeys {
             }
         };
 
+        this.address = () => address;
+
         /**
          * @description Add the sender's public key to the public key store;
          * @param {*} publicKey Sender's public key

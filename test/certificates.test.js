@@ -20,8 +20,8 @@ const keys = generateAddressesFromSeed(process.env.TEST_MNEMONIC, 10);
 const CertificatesArtifact = artifacts.require('Certificates');
 const IssuersArtifact = artifacts.require('Issuers');
 
-const Issuers = require('../src/issuers');
-const Certificates = require('../src/certificates');
+const IssuersApi = require('../src/issuers');
+const CertificatesApi = require('../src/certificates');
 
 const certificate = {
     name: 'Sam Smith',
@@ -59,8 +59,8 @@ const nonExistingCertificateHash = crypto
 describe('Certificates API', () => {
     let issuersApi,
         certificatesApi,
-        certificates,
-        issuers;
+        certificatesContract,
+        issuersContract;
 
     const identities = {
         owner: keys[0],
@@ -81,13 +81,13 @@ describe('Certificates API', () => {
         IssuersArtifact.setProvider(web3.currentProvider);
 
         // Deploy certificates
-        issuers = await IssuersArtifact.new({ from: identities.owner.address });
-        certificates = await CertificatesArtifact.new(issuers.address, { from: identities.owner.address });
+        issuersContract = await IssuersArtifact.new({ from: identities.owner.address });
+        certificatesContract = await CertificatesArtifact.new(issuersContract.address, { from: identities.owner.address });
 
         // Create an instance of issuers api
-        issuersApi = new Issuers(web3, issuers.abi, issuers.address);
+        issuersApi = new IssuersApi(web3, issuersContract.abi, issuersContract.address);
         // Create an instance of certificates api
-        certificatesApi = new Certificates(web3, certificates.abi, certificates.address);
+        certificatesApi = new CertificatesApi(web3, certificatesContract.abi, certificatesContract.address);
 
         // Add an issuer to the issuers contract
         await issuersApi.addIssuer(identities.issuer.address, identities.owner.address);

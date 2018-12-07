@@ -20,10 +20,10 @@ const sender = generateAddressesFromSeed(process.env.TEST_MNEMONIC, 1)[0];
 const PublicKeysArtifact = artifacts.require('PublicKeys');
 
 // issuers.js module that we are testing
-const PublicKeys = require('../src/pubkeys');
+const PublicKeysApi = require('../src/pubkeys');
 
 describe('PublicKeys API', () => {
-    let pubkeys,
+    let pubkeysContract,
         pubkeysApi;
 
     before(async () => {
@@ -31,10 +31,10 @@ describe('PublicKeys API', () => {
 
         PublicKeysArtifact.setProvider(web3.currentProvider);
 
-        pubkeys = await PublicKeysArtifact.new({ from: sender.address });
+        pubkeysContract = await PublicKeysArtifact.new({ from: sender.address });
 
         // Instantiate issuers API
-        pubkeysApi = new PublicKeys(web3, pubkeys.abi, pubkeys.address);
+        pubkeysApi = new PublicKeysApi(web3, pubkeysContract.abi, pubkeysContract.address);
     });
 
     it('Adding a public key', async () => {
