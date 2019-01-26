@@ -16,8 +16,7 @@
   "files": [
     "README.md",
     "index.js",
-    "./src/certificates.js",
-    "./src/issuers.js"
+    "./src/"
   ],
   "dependencies": {
     "path-protocol-artifacts": "0.0.3",

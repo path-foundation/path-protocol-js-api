@@ -42,7 +42,7 @@ describe('Issuers API', () => {
         issuersContract = await IssuersArtifact.new({ from: identities.owner.address });
 
         // Instantiate issuers API
-        issuersApi = new IssuersApi(web3, issuersContract.abi, issuersContract.address);
+        issuersApi = new IssuersApi(web3.currentProvider, issuersContract.address);
     });
 
     it('Adding an issuer', async () => {

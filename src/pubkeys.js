@@ -1,16 +1,19 @@
 const truffleContract = require('truffle-contract');
+const { abi } = require('path-protocol-artifacts/abi/PublicKeys.json');
+
+const normalizeAddress = require('./util/normalizeAddress');
 
 const normalizeBytes = require('./util/normalizeBytes');
 
 class PublicKeys {
-    constructor(web3, abi, address) {
+    constructor(web3provider, address) {
         let instance;
         let initialized;
 
         this.init = async () => {
             if (!initialized) {
                 const contract = truffleContract({ abi });
-                contract.setProvider(web3.currentProvider);
+                contract.setProvider(web3provider);
                 instance = await contract.at(address);
                 initialized = true;
             }
@@ -26,7 +29,7 @@ class PublicKeys {
         this.addPublicKey = async (publicKey, sender) => {
             await this.init();
 
-            const tx = await instance.addPublicKey(normalizeBytes(publicKey), { from: sender || web3.defaultAccount });
+            const tx = await instance.addPublicKey(normalizeBytes(publicKey), { from: sender });
             return tx;
         };
 
@@ -39,7 +42,7 @@ class PublicKeys {
         this.getPublicKey = async (addr) => {
             await this.init();
 
-            const pub = await instance.publicKeyStore(addr);
+            const pub = await instance.publicKeyStore(normalizeAddress(addr));
             return pub;
         };
     }

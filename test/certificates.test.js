@@ -85,9 +85,9 @@ describe('Certificates API', () => {
         certificatesContract = await CertificatesArtifact.new(issuersContract.address, { from: identities.owner.address });
 
         // Create an instance of issuers api
-        issuersApi = new IssuersApi(web3, issuersContract.abi, issuersContract.address);
+        issuersApi = new IssuersApi(web3.currentProvider, issuersContract.address);
         // Create an instance of certificates api
-        certificatesApi = new CertificatesApi(web3, certificatesContract.abi, certificatesContract.address);
+        certificatesApi = new CertificatesApi(web3.currentProvider, /*certificatesContract.abi,*/ certificatesContract.address);
 
         // Add an issuer to the issuers contract
         await issuersApi.addIssuer(identities.issuer.address, identities.owner.address);

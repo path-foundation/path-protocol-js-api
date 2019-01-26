@@ -34,7 +34,7 @@ describe('PublicKeys API', () => {
         pubkeysContract = await PublicKeysArtifact.new({ from: sender.address });
 
         // Instantiate issuers API
-        pubkeysApi = new PublicKeysApi(web3, pubkeysContract.abi, pubkeysContract.address);
+        pubkeysApi = new PublicKeysApi(web3.currentProvider, pubkeysContract.address);
     });
 
     it('Adding a public key', async () => {

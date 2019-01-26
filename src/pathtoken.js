@@ -1,14 +1,15 @@
 const truffleContract = require('truffle-contract');
+const { abi } = require('path-protocol-artifacts/abi/PathToken.json');
 
 class PathToken {
-    constructor(web3, abi, address) {
+    constructor(web3provider, address) {
         let instance;
         let initialized;
 
         this.init = async () => {
             if (!initialized) {
                 const contract = truffleContract({ abi });
-                contract.setProvider(web3.currentProvider);
+                contract.setProvider(web3provider);
                 instance = await contract.at(address);
                 initialized = true;
             }

@@ -40,7 +40,7 @@ describe('PathToken API', () => {
         tokenContract = await PathTokenArtifact.new({ from: identities.account1.address });
 
         // Instantiate issuers API
-        tokenApi = new PathTokenApi(web3, tokenContract.abi, tokenContract.address);
+        tokenApi = new PathTokenApi(web3.currentProvider, tokenContract.address);
     });
 
     it('transfer tokens from account1 to account2', async () => {

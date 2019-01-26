@@ -1,9 +1,10 @@
 const truffleContract = require('truffle-contract');
+const { abi } = require('path-protocol-artifacts/abi/Issuers.json');
 
 const contractUtil = require('./util/contractUtil');
 
 class Issuers {
-    constructor(web3, abi, address) {
+    constructor(web3provider, address) {
         let instance;
         let initialized;
 
@@ -17,7 +18,7 @@ class Issuers {
         this.init = async () => {
             if (!initialized) {
                 const contract = truffleContract({ abi });
-                contract.setProvider(web3.currentProvider);
+                contract.setProvider(web3provider);
                 instance = await contract.at(address);
                 initialized = true;
             }

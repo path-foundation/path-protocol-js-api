@@ -84,10 +84,10 @@ describe('Escrow API', () => {
         );
 
         // Instantiate API's
-        tokenApi = new TokenApi(web3, tokenContract.abi, tokenContract.address);
-        escrowApi = new EscrowApi(web3, escrowContract.abi, escrowContract.address);
-        issuersApi = new IssuersApi(web3, issuersContract.abi, issuersContract.address);
-        certificatesApi = new CertificatesApi(web3, certContract.abi, certContract.address);
+        tokenApi = new TokenApi(web3.currentProvider, tokenContract.address);
+        escrowApi = new EscrowApi(web3.currentProvider, escrowContract.address);
+        issuersApi = new IssuersApi(web3.currentProvider, issuersContract.address);
+        certificatesApi = new CertificatesApi(web3.currentProvider, certContract.address);
 
         // *** Set things up
         // Whitelist test issuer
