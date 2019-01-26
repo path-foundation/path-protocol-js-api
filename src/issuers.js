@@ -1,7 +1,7 @@
 const truffleContract = require('truffle-contract');
 const { abi } = require('path-protocol-artifacts/abi/Issuers.json');
 
-const contractUtil = require('./util/contractUtil');
+const contractHelpers = require('./util/contractHelpers');
 
 class Issuers {
     constructor(web3provider, address) {
@@ -37,7 +37,7 @@ class Issuers {
 
             // Check if the sender is the contract owner or deputy -
             // no need to sendthe transaction and spend gas if the sender is invalid
-            await contractUtil.checkOwnerDeputy(instance, sender, 'Issuer');
+            await contractHelpers.checkOwnerDeputy(instance, sender, 'Issuer');
 
             const tx = await instance.addIssuer(issuer, { from: sender });
             return tx;
@@ -54,7 +54,7 @@ class Issuers {
 
             // Check if the sender is the contract owner or deputy -
             // no need to sendthe transaction and spend gas if the sender is invalid
-            await contractUtil.checkOwnerDeputy(instance, sender, 'Issuer');
+            await contractHelpers.checkOwnerDeputy(instance, sender, 'Issuer');
 
             const tx = await instance.removeIssuer(issuer, { from: sender });
             return tx;

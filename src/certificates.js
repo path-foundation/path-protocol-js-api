@@ -1,7 +1,7 @@
 const truffleContract = require('truffle-contract');
 const { abi } = require('path-protocol-artifacts/abi/Certificates.json');
 
-const normalizeBytes = require('./util/normalizeBytes');
+const { ensure0x } = require('./util/stringHelpers');
 
 class Certificates {
     constructor(web3provider, address) {
@@ -27,7 +27,7 @@ class Certificates {
         this.addCertificate = async (userAddress, certificateHash, sender) => {
             await this.init();
 
-            const tx = await instance.addCertificate(userAddress, normalizeBytes(certificateHash), { from: sender });
+            const tx = await instance.addCertificate(userAddress, ensure0x(certificateHash), { from: sender });
             return tx;
         };
 
@@ -41,7 +41,7 @@ class Certificates {
             await this.init();
 
             // First we need to retrieve the certificate index
-            const index = await this.getCertificateIndex(userAddress, normalizeBytes(certificateHash));
+            const index = await this.getCertificateIndex(userAddress, ensure0x(certificateHash));
 
             const tx = await instance.revokeCertificate(userAddress, index, { from: sender });
             return tx;
@@ -55,7 +55,7 @@ class Certificates {
         this.getCertificateIndex = async (userAddress, certificateHash) => {
             await this.init();
 
-            const index = await instance.getCertificateIndex(userAddress, normalizeBytes(certificateHash));
+            const index = await instance.getCertificateIndex(userAddress, ensure0x(certificateHash));
             return index;
         };
 
@@ -80,7 +80,7 @@ class Certificates {
         this.getCertificateMetadata = async (userAddress, certificateHash) => {
             await this.init();
 
-            const meta = await instance.getCertificateMetadata(userAddress, normalizeBytes(certificateHash));
+            const meta = await instance.getCertificateMetadata(userAddress, ensure0x(certificateHash));
             return meta;
         };
 

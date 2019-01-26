@@ -3,7 +3,7 @@ const Web3 = require('web3');
 const Resolver = require('truffle-resolver');
 const path = require('path');
 const { generateAddressesFromSeed } = require('./util/keys');
-const normalizeBytes = require('../src/util/normalizeBytes');
+const { ensure0x } = require('../src/util/stringHelpers');
 
 const artifacts = new Resolver({
     // Project directory
@@ -44,6 +44,6 @@ describe('PublicKeys API', () => {
         // check that the issuer has been added
         const publicKey = await pubkeysApi.getPublicKey(sender.address);
 
-        assert.equal(publicKey, normalizeBytes(sender.publicKey));
+        assert.equal(publicKey, ensure0x(sender.publicKey));
     });
 });
