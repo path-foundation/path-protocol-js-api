@@ -51,6 +51,7 @@ class Certificates {
          * Method returns an index of the certificate hash in the user's list of certificates
          * @param {*} userAddress User's address
          * @param {*} certificateHash Certificate hash
+         * @returns {int} index certificate index in user's certificate array
          */
         this.getCertificateIndex = async (userAddress, certificateHash) => {
             await this.init();
@@ -74,14 +75,16 @@ class Certificates {
 
         /**
          * Method returns a certificate's metadata (issuer, revoked status)
-         * @param {*} userAddress User's address
-         * @param {*} certificateHash Certificate hash
+         * @param {address} userAddress User's address
+         * @param {bytes} certificateHash Certificate hash
+         * @returns {address} issuer certificate issuer
+         * @returns {bool} revoked whether the certificate is active or revoked
          */
         this.getCertificateMetadata = async (userAddress, certificateHash) => {
             await this.init();
 
             const meta = await instance.getCertificateMetadata(userAddress, ensure0x(certificateHash));
-            return meta;
+            return { issuer: meta[0], revoked: meta[1] };
         };
 
         /**
@@ -89,11 +92,10 @@ class Certificates {
          * @param {*} userAddress User's address
          * @param {*} index Certificate index in the list of user's certificates
          */
-        this.getCertificateAt = async (userAddress, index) => {
+        this.getCertificateHashAt = async (userAddress, index) => {
             await this.init();
 
-            const cert = await instance.getCertificateAt(userAddress, index);
-            return cert;
+            return instance.getCertificateAt(userAddress, index);
         };
     }
 }
